@@ -1,0 +1,61 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags: []
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - 
+  - 
+  - PlayerLayer
+  - 
+  - 
+  - 
+  - 
+  - BackgroundLayer
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 1784449451
+    locked: 0
+  - name: BackgroundObjects
+    uniqueID: 2509662039
+    locked: 0
+  - name: Planets
+    uniqueID: 378545903
+    locked: 0
+  - name: Interactibles
+    uniqueID: 1889569289
+    locked: 0
+  - name: Others
+    uniqueID: 1985211465
+    locked: 0
+  - name: Player
+    uniqueID: 5168395
+    locked: 0
