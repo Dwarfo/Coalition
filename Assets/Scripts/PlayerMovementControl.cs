@@ -6,8 +6,11 @@ public class PlayerMovementControl : MonoBehaviour {
 
     public Rigidbody2D Player;
     public float topSpeed = 10f;
+    public float Acceleration = 10f;
     public float rotSpeed = 10f;
     public bool mode = true;
+
+    private int dragValue = 10;
     //Mode will be provided by PlayerState class
     private Vector2 direction;
 
@@ -19,22 +22,40 @@ public class PlayerMovementControl : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-        direction = new Vector2(Input.GetAxisRaw("Horizontal") * topSpeed, Input.GetAxisRaw("Vertical") * topSpeed);
-        if(mode)
-           modeFly(direction);
+        direction = new Vector2(Input.GetAxisRaw("Horizontal") * Acceleration, Input.GetAxisRaw("Vertical") * Acceleration);
     }
 
-    private void modeFly(Vector2 directon)
+    private void FixedUpdate()
     {
-        Player.velocity = Lerping(direction);
+        //Player.velocity = direction;
+        if (mode)
+            modeFly(direction);
+    }
+
+    private void modeFly(Vector2 direction)
+    {
+        //Player.velocity = direction;
+        Player.AddForce(direction);
+        Player.velocity = clampVelocity();
         Debug.Log(Player.velocity);
+
+        if (Player.velocity.x != 0 && direction.x == 0 && direction.y !=0)
+            Player.velocity = new Vector2(Mathf.Lerp(Player.velocity.x, 0, 0.2f), Player.velocity.y);
+        if (Player.velocity.y != 0 && direction.y == 0 && direction.x != 0)
+            Player.velocity = new Vector2(Player.velocity.x, Mathf.Lerp(Player.velocity.y, 0, 0.2f));
+            
+        if (direction == Vector2.zero)
+            Player.drag = dragValue;
+        else
+            Player.drag = 0;
+
         Rotate(Player.transform, direction);
     }
 
-    private Vector2 Lerping(Vector2 direction)
+    private Vector2 clampVelocity()
     {
-        float x = Mathf.Lerp(Player.velocity.x, direction.x, Time.deltaTime * topSpeed);
-        float y = Mathf.Lerp(Player.velocity.y, direction.y, Time.deltaTime * topSpeed);
+        float x = Mathf.Clamp(Player.velocity.x, -topSpeed, topSpeed);
+        float y = Mathf.Clamp(Player.velocity.y, -topSpeed, topSpeed);
 
         return new Vector2(x, y);
     }

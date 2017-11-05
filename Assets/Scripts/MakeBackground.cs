@@ -54,7 +54,13 @@ public class MakeBackground : MonoBehaviour {
          }
       
     }
-	
+
+    void MakeCameraBounds(int width, int heigth)
+    {
+        GameObject cameraBorders = new GameObject();
+        cameraBorders.AddComponent<BoxCollider2D>();
+
+    }
 	// Update is called once per frame
 	void Update () {
 		
