@@ -31,7 +31,7 @@ public class MakeBackground : MonoBehaviour {
          
          go.name = "Background" + (k).ToString();
          SpriteRenderer renderer = go.AddComponent<SpriteRenderer>();
-         go.transform.position = new Vector2(-10 + i * (2.5f), -5 + j * (2.5f));
+         go.transform.position = new Vector2( i * (2.5f),  j * (2.5f));
          renderer.sprite = background.sprite;
          go.transform.SetParent(this.transform, false);
          renderer.sortingLayerName = "Background";
@@ -47,7 +47,7 @@ public class MakeBackground : MonoBehaviour {
              GameObject mGo = new GameObject();
              mGo.name = "Meteor" + (k).ToString(); ;
              SpriteRenderer mRenderer = mGo.AddComponent<SpriteRenderer>();
-             mGo.transform.position = new Vector2(-10 + i * (2.5f), -5 + j * (2.5f));
+             mGo.transform.position = new Vector2(i * (2.5f), j * (2.5f));
              mRenderer.sprite = Resources.Load("meteorBrown_big1", typeof(Sprite)) as Sprite;
              mRenderer.sortingLayerName = "BackgroundObjects";
              mGo.transform.SetParent(this.transform, false);

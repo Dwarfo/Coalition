@@ -5,6 +5,7 @@ using UnityEngine;
 public class CameraControlls : MonoBehaviour {
 
     public Transform player;
+    public MakeBackground mb;
     public float smoothTime = 0.2f;
     public float maxSmoothSpeed;
     private Vector3 velocity = Vector3.zero;
@@ -18,7 +19,10 @@ public class CameraControlls : MonoBehaviour {
 
     void Start ()
     {
-		
+        minX = 10f;
+        minY = 5f;
+        maxX = (mb.width - 1)  * 2.5f - minX;
+        maxY = (mb.heigth - 1) * 2.5f - minY;
 	}
 
     /*void computeClamps()
@@ -31,7 +35,7 @@ public class CameraControlls : MonoBehaviour {
     {
         //Vector3 newPosition = new Vector3(Mathf.Clamp(player.position.x,minX,maxX), Mathf.Clamp(player.position.y,minY,maxY), transform.position.z);
 
-        Vector3 newPosition = new Vector3(player.position.x,player.position.y,transform.position.z);
+        Vector3 newPosition = new Vector3(Mathf.Clamp(player.position.x, minX, maxX), Mathf.Clamp(player.position.y, minY, maxY), transform.position.z);
         //transform.position = Vector3.SmoothDamp(transform.position, newPosition, ref velocity, smoothTime);
         transform.position = newPosition;
     }
