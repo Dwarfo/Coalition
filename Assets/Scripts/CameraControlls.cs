@@ -19,10 +19,10 @@ public class CameraControlls : MonoBehaviour {
 
     void Start ()
     {
-        minX = 10f;
+        minX = 11.25f;
         minY = 5f;
-        maxX = (mb.width - 1)  * 2.5f - minX;
-        maxY = (mb.heigth - 1) * 2.5f - minY;
+        maxX = (mb.width - 1)  * 2.5f ;
+        maxY = (mb.heigth - 1) * 2.5f ;
 	}
 
     /*void computeClamps()
@@ -33,7 +33,7 @@ public class CameraControlls : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-        //Vector3 newPosition = new Vector3(Mathf.Clamp(player.position.x,minX,maxX), Mathf.Clamp(player.position.y,minY,maxY), transform.position.z);
+        //Vector3 newPosition = new Vector3(player.position.x,player.position.y, transform.position.z);
 
         Vector3 newPosition = new Vector3(Mathf.Clamp(player.position.x, minX, maxX), Mathf.Clamp(player.position.y, minY, maxY), transform.position.z);
         //transform.position = Vector3.SmoothDamp(transform.position, newPosition, ref velocity, smoothTime);
