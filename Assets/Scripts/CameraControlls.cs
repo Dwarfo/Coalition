@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class CameraControlls : MonoBehaviour {
 
+    //Player that is going to be watched by camera
     public Transform player;
+    //MakeBackgroud script provides sizes of map
     public MakeBackground mb;
     public float smoothTime = 0.2f;
-    public float maxSmoothSpeed;
+    public float maxSmoothSpeed = 5f;
     private Vector3 velocity = Vector3.zero;
-    // Use this for initialization
 
+    //Clamp values
     private float minX;
     private float maxX;
     private float minY;
@@ -19,24 +21,24 @@ public class CameraControlls : MonoBehaviour {
 
     void Start ()
     {
-        minX = 11.25f;
-        minY = 5f;
-        maxX = (mb.width - 1)  * 2.5f ;
-        maxY = (mb.heigth - 1) * 2.5f ;
+        computeClamps();
 	}
 
-    /*void computeClamps()
+    void computeClamps()
     {
-
+        Camera thisCamera = gameObject.GetComponent<Camera>();
+        //Getting Clamp values depending on camera Size and AspectRatio
+        minX = thisCamera.orthographicSize * thisCamera.aspect;
+        minY = thisCamera.orthographicSize;
+        maxX = mb.width * 2.5f - minX;
+        maxY = mb.heigth * 2.5f - minY;
     }
-	*/
-	// Update is called once per frame
-	void Update ()
+	
+    void Update ()
     {
         //Vector3 newPosition = new Vector3(player.position.x,player.position.y, transform.position.z);
-
+        //Computing and updating Camera position
         Vector3 newPosition = new Vector3(Mathf.Clamp(player.position.x, minX, maxX), Mathf.Clamp(player.position.y, minY, maxY), transform.position.z);
-        //transform.position = Vector3.SmoothDamp(transform.position, newPosition, ref velocity, smoothTime);
         transform.position = newPosition;
     }
 }

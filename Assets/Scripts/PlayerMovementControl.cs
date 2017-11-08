@@ -34,7 +34,7 @@ public class PlayerMovementControl : MonoBehaviour {
 
     private void modeFly(Vector2 direction)
     {
-        //Player.velocity = direction;
+        //Depending on mode, topSpeed and direction addForce to move player
         Player.AddForce(direction);
         Player.velocity = clampVelocity();
         Debug.Log(Player.velocity);
@@ -54,6 +54,7 @@ public class PlayerMovementControl : MonoBehaviour {
 
     private Vector2 clampVelocity()
     {
+        // clamp between topSpeed negative and positive values
         float x = Mathf.Clamp(Player.velocity.x, -topSpeed, topSpeed);
         float y = Mathf.Clamp(Player.velocity.y, -topSpeed, topSpeed);
 
@@ -65,7 +66,8 @@ public class PlayerMovementControl : MonoBehaviour {
         int xAngle = -(int)tr.rotation.x;
         int yAngle = -(int)tr.rotation.y;
         int angle = (int)tr.rotation.z;
-   
+
+        //Depending on input compute "Z" Vector rotation value
         if (direction.x > 0) xAngle = 270;
         if (direction.x < 0) xAngle = 90;
         if (direction.y < 0) yAngle = 180;
@@ -86,7 +88,7 @@ public class PlayerMovementControl : MonoBehaviour {
             //Debug.Log("Rotation x=" + xAngle.ToString() + " , y =" + yAngle.ToString());
             //Debug.Log("Direction x=" + direction.x.ToString() + " , y =" + direction.y.ToString());
         }
-        
+        //Make sure you don't rotate when there is no input
         if (direction != Vector2.zero)
             tr.rotation = Quaternion.Slerp(tr.rotation, Quaternion.Euler(0, 0, angle), Time.deltaTime * rotSpeed);
 

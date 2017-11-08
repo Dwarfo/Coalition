@@ -29,14 +29,14 @@ public class MakeBackground : MonoBehaviour {
 
     void CreateBounds()
     {
+        //getting a gameObject that represents Bounds
         GameObject bounds = transform.Find("Bounds").gameObject;
+        //And placing it at the center of generated map
         bounds.transform.position = new Vector2((width * 2.5f) / 2, (heigth * 2.5f) / 2);
-        //CompositeCollider2D allTheBounds = bounds.AddComponent<CompositeCollider2D>();
-        Destroy(bounds.GetComponent<Rigidbody2D>());
 
         GameObject[] boundaries = new GameObject[4];
         BoxCollider2D[] bColliders = new BoxCollider2D[4];
-
+        // 4 gameObject's, all having it's own colider, on each side of the map
         for (int i = 0; i < 4; i++)
         {
             boundaries[i] = new GameObject();
@@ -47,27 +47,29 @@ public class MakeBackground : MonoBehaviour {
             //bColliders[i].usedByComposite = true;
         }
 
-
+        //Placing gameObject's on the sides of the map
         boundaries[0].transform.position = new Vector2(0, (heigth * 2.5f) / 2);
         boundaries[1].transform.position = new Vector2((width * 2.5f) / 2, heigth * 2.5f);
         boundaries[2].transform.position = new Vector2(width * 2.5f, (heigth * 2.5f) / 2);
         boundaries[3].transform.position = new Vector2((width * 2.5f) / 2, 0);
-
+        //Adjusting collider sizes according to the map size
         bColliders[0].size = new Vector2(1, heigth * 2.5f);
         bColliders[1].size = new Vector2(width * 2.5f, 1);
         bColliders[2].size = new Vector2(1, heigth * 2.5f);
         bColliders[3].size = new Vector2(width * 2.5f, 1);
-        //bound.size = new Vector2(width * 2.5f, heigth * 2.5f);
+        
     }
 
     void CreateBackgroundTile(int i,int j, int k)
     {
+        //Creating a tile gameObject and placing on some coordinates
         GameObject go = new GameObject();
 
         go.name = "Background" + (k).ToString();
         SpriteRenderer renderer = go.AddComponent<SpriteRenderer>();
         go.transform.position = new Vector2(i * (2.5f) + 1.25f, j * (2.5f) + 1.25f);
         renderer.sprite = background.sprite;
+        //Make tile a child of a BackGround creator and putting in right sorting layer
         go.transform.SetParent(this.transform, false);
         renderer.sortingLayerName = "Background";
        
@@ -75,7 +77,8 @@ public class MakeBackground : MonoBehaviour {
 
     void PopulateWithObjects(int i, int j, int k)
     {
-         int meteor = Random.Range(1, 10);
+        //Randomly generate objects taken from Resources
+        int meteor = Random.Range(1, 10);
 
         if (j != heigth && j != 0)
         {
@@ -92,14 +95,7 @@ public class MakeBackground : MonoBehaviour {
         }
       
     }
-
-    void MakeCameraBounds(int width, int heigth)
-    {
-        GameObject cameraBorders = new GameObject();
-        cameraBorders.AddComponent<BoxCollider2D>();
-
-    }
-	// Update is called once per frame
+	
 	void Update () {
 		
 	}
