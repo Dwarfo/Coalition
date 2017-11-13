@@ -44,6 +44,7 @@ public class MakeBackground : MonoBehaviour {
             boundaries[i].name = "Boundary" + i.ToString();
 
             bColliders[i] = boundaries[i].AddComponent<BoxCollider2D>();
+            boundaries[i].layer = 9;
             //bColliders[i].usedByComposite = true;
         }
 

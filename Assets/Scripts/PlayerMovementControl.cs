@@ -28,16 +28,27 @@ public class PlayerMovementControl : MonoBehaviour {
     private void FixedUpdate()
     {
         //Player.velocity = direction;
-        if (mode)
-            modeFly(direction);
+        modeFly(direction);
+       
     }
 
     private void modeFly(Vector2 direction)
     {
         //Depending on mode, topSpeed and direction addForce to move player
+        int speedKoef;
+        if (mode)
+        {
+            speedKoef = 1;
+        }
+        else
+        {
+            speedKoef = 2;
+            direction = direction / 2;
+        }
+
         Player.AddForce(direction);
-        Player.velocity = clampVelocity();
-        Debug.Log(Player.velocity);
+        Player.velocity = clampVelocity(speedKoef);
+        //Debug.Log(Player.velocity);
 
         if (Player.velocity.x != 0 && direction.x == 0 && direction.y !=0)
             Player.velocity = new Vector2(Mathf.Lerp(Player.velocity.x, 0, 0.2f), Player.velocity.y);
@@ -49,14 +60,19 @@ public class PlayerMovementControl : MonoBehaviour {
         else
             Player.drag = 0;
 
-        Rotate(Player.transform, direction);
+        if (mode)
+            Rotate(Player.transform, direction);
+        else
+            BRotate(Player.transform);
     }
 
-    private Vector2 clampVelocity()
+
+
+    private Vector2 clampVelocity(int modeKoef)
     {
-        // clamp between topSpeed negative and positive values
-        float x = Mathf.Clamp(Player.velocity.x, -topSpeed, topSpeed);
-        float y = Mathf.Clamp(Player.velocity.y, -topSpeed, topSpeed);
+        // clamp between topSpeed negative and positive values depending on mode
+        float x = Mathf.Clamp(Player.velocity.x, -topSpeed / modeKoef, topSpeed / modeKoef);
+        float y = Mathf.Clamp(Player.velocity.y, -topSpeed / modeKoef, topSpeed / modeKoef);
 
         return new Vector2(x, y);
     }
@@ -92,5 +108,13 @@ public class PlayerMovementControl : MonoBehaviour {
         if (direction != Vector2.zero)
             tr.rotation = Quaternion.Slerp(tr.rotation, Quaternion.Euler(0, 0, angle), Time.deltaTime * rotSpeed);
 
+    }
+
+    private void BRotate(Transform tr)
+    {
+        Vector3 difference = Camera.main.ScreenToWorldPoint(Input.mousePosition) - tr.position;
+        difference.Normalize();
+        float rotation_z = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg - 90;
+        tr.rotation = Quaternion.Euler(0f, 0f, rotation_z);
     }
 }

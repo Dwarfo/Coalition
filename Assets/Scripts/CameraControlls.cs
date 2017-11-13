@@ -11,6 +11,8 @@ public class CameraControlls : MonoBehaviour {
     public float smoothTime = 0.2f;
     public float maxSmoothSpeed = 5f;
     private Vector3 velocity = Vector3.zero;
+    private PlayerMovementControl PMC;
+    private Vector3 newPosition;
 
     //Clamp values
     private float minX;
@@ -22,6 +24,7 @@ public class CameraControlls : MonoBehaviour {
     void Start ()
     {
         computeClamps();
+        PMC = player.gameObject.GetComponent<PlayerMovementControl>();
 	}
 
     void computeClamps()
@@ -38,7 +41,11 @@ public class CameraControlls : MonoBehaviour {
     {
         //Vector3 newPosition = new Vector3(player.position.x,player.position.y, transform.position.z);
         //Computing and updating Camera position
-        Vector3 newPosition = new Vector3(Mathf.Clamp(player.position.x, minX, maxX), Mathf.Clamp(player.position.y, minY, maxY), transform.position.z);
+        if(PMC.mode)
+           newPosition = new Vector3(Mathf.Clamp(player.position.x, minX, maxX), Mathf.Clamp(player.position.y, minY, maxY), transform.position.z);
+        else
+           newPosition = new Vector3(Mathf.Clamp(player.position.x, minX, maxX), Mathf.Clamp(player.position.y, minY, maxY), transform.position.z);
+        //Camera.main.ScreenToWorldPoint(Input.mousePosition) - tr.position
         transform.position = newPosition;
     }
 }
