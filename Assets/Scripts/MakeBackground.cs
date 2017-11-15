@@ -8,6 +8,7 @@ public class MakeBackground : MonoBehaviour {
     public SpriteRenderer objects = new SpriteRenderer();
     public int width = 10;
     public int heigth = 10;
+    public GameObject BigMeteor;
 
 	// Use this for initialization
 	void Start ()
@@ -78,6 +79,7 @@ public class MakeBackground : MonoBehaviour {
 
     void PopulateWithObjects(int i, int j, int k)
     {
+        string[] meteorSprites = {"MB1", "MB2", "MB3", "MB4", "MG1", "MG2", "MG3", "MG4" };
         //Randomly generate objects taken from Resources
         int meteor = Random.Range(1, 10);
 
@@ -85,13 +87,20 @@ public class MakeBackground : MonoBehaviour {
         {
             if (meteor >= 9)
             {
-                GameObject mGo = new GameObject();
-                mGo.name = "Meteor" + (k).ToString(); ;
-                SpriteRenderer mRenderer = mGo.AddComponent<SpriteRenderer>();
-                mGo.transform.position = new Vector2(i * (2.5f) + 1.25f, j * (2.5f));
-                mRenderer.sprite = Resources.Load("meteorBrown_big1", typeof(Sprite)) as Sprite;
+                GameObject mGo = Instantiate(BigMeteor, new Vector2(i * (2.5f) + 1.25f, j * (2.5f)), Quaternion.Euler(transform.rotation.x,transform.rotation.y, Random.Range(0, 180)) );
+                SpriteRenderer mRenderer = mGo.GetComponent<SpriteRenderer>();
+                int meteorSprite = Random.Range(1, 8);
+                mRenderer.sprite = Resources.Load(meteorSprites[meteorSprite], typeof(Sprite)) as Sprite;
                 mRenderer.sortingLayerName = "BackgroundObjects";
                 mGo.transform.SetParent(this.transform, false);
+                //GameObject mGo = Resources.Load("MeteorBig", typeof(GameObject)) as GameObject;
+                /*mGo.name = "BigMeteor" + (k).ToString(); ;
+                SpriteRenderer mRenderer = mGo.GetComponent<SpriteRenderer>();
+                mGo.transform.position = new Vector2(i * (2.5f) + 1.25f, j * (2.5f));
+                int meteorSprite = Random.Range(1, 8);
+                mRenderer.sprite = Resources.Load(meteorSprites[meteorSprite], typeof(Sprite)) as Sprite;
+                mRenderer.sortingLayerName = "BackgroundObjects";
+                mGo.transform.SetParent(this.transform, false);*/
             }
         }
       
