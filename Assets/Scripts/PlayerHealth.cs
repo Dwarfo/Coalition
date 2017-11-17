@@ -32,12 +32,11 @@ public class PlayerHealth : MonoBehaviour,IHealthPoint {
         if (collision.gameObject.layer != 9)
         {
             DamageInfo dmgInfo = collision.gameObject.GetComponent<DamageInfo>();
-            float damage = dmgInfo.damage * PMC.Player.velocity.magnitude;
-            //float damage = 1f * PMC.Player.velocity.magnitude;
-            receiveDamage(damage);
-            Debug.Log("Hit!" + damage.ToString());
-        }
 
+            //float damage = 1f * PMC.Player.velocity.magnitude;
+            receiveDamage(dmgInfo.damage * PMC.Player.velocity.magnitude);
+            Debug.Log("Hit!" + dmgInfo.damage.ToString());
+        }
     }
 
     private void OnCollisionStay2D(Collision2D collision)
@@ -46,11 +45,9 @@ public class PlayerHealth : MonoBehaviour,IHealthPoint {
         if (colcounter == 10 && collision.gameObject.layer != 9)
         {
             DamageInfo dmgInfo = collision.gameObject.GetComponent<DamageInfo>();
-            float damage = dmgInfo.mass * PMC.Player.velocity.magnitude / 10;
-            //float damage = 1f * PMC.Player.velocity.magnitude;
-            receiveDamage(damage);
-            Debug.Log("Hit!" + damage.ToString());
-            colcounter = 0;
+
+            receiveDamage(dmgInfo.damage);
+            Debug.Log("Hit!" + dmgInfo.damage.ToString());
         }
 
     }

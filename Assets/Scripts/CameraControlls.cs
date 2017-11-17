@@ -10,7 +10,6 @@ public class CameraControlls : MonoBehaviour {
     public MakeBackground mb;
     public float smoothTime = 0.2f;
     public float maxSmoothSpeed = 5f;
-    private Vector3 velocity = Vector3.zero;
     private PlayerMovementControl PMC;
     private Vector3 newPosition;
 
