@@ -33,7 +33,7 @@ public class MeteorBreak : MonoBehaviour, IHealthPoint
     public void getDestroyed()
     {
         string BiggerMeteor = gameObject.GetComponent<SpriteRenderer>().sprite.name.Substring(0,2);
-        Debug.Log(BiggerMeteor);
+        //Debug.Log(BiggerMeteor);
         
         if (SmallerMeteor != null)
         {
@@ -61,10 +61,13 @@ public class MeteorBreak : MonoBehaviour, IHealthPoint
         {
             DamageInfo dmgInfo = collision.gameObject.GetComponent<DamageInfo>();
             float objVelocity = collision.gameObject.GetComponent<Rigidbody2D>().velocity.magnitude;
+            float damage = dmgInfo.damage;
             if (!dmgInfo.isProjectile)
+            {
                 objVelocity /= hardness;
-            //float damage = 1f * PMC.Player.velocity.magnitude;
-            receiveDamage(dmgInfo.damage * objVelocity);
+                damage *= objVelocity;
+            }
+            receiveDamage(damage);
             Debug.Log("Hit!" + dmgInfo.damage.ToString());
         }
 

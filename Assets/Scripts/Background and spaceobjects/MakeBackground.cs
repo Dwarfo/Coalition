@@ -87,7 +87,7 @@ public class MakeBackground : MonoBehaviour {
         {
             if (meteor >= 9)
             {
-                GameObject mGo = Instantiate(BigMeteor, new Vector2(i * (2.5f) + 1.25f, j * (2.5f)), Quaternion.Euler(transform.rotation.x,transform.rotation.y, Random.Range(0, 180)) );
+                GameObject mGo = Instantiate(BigMeteor, new Vector2(i * (2.5f) + 1.25f + Random.Range(0, 2), j * (2.5f) + Random.Range(0, 2)), Quaternion.Euler(transform.rotation.x,transform.rotation.y, Random.Range(0, 180)) );
                 SpriteRenderer mRenderer = mGo.GetComponent<SpriteRenderer>();
                 int meteorSprite = Random.Range(1, 8);
                 mRenderer.sprite = Resources.Load(meteorSprites[meteorSprite], typeof(Sprite)) as Sprite;

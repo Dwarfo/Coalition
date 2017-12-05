@@ -34,7 +34,14 @@ public class PlayerHealth : MonoBehaviour,IHealthPoint {
             DamageInfo dmgInfo = collision.gameObject.GetComponent<DamageInfo>();
 
             //float damage = 1f * PMC.Player.velocity.magnitude;
-            receiveDamage(dmgInfo.damage * PMC.Player.velocity.magnitude);
+            if (!dmgInfo.isProjectile)
+            {
+                receiveDamage(dmgInfo.damage * PMC.Player.velocity.magnitude);
+            }
+            else
+            {
+                receiveDamage(dmgInfo.damage);
+            }
             Debug.Log("Hit!" + dmgInfo.damage.ToString());
         }
     }
