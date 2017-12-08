@@ -23,6 +23,9 @@ public class PlayerMovementControl : MonoBehaviour {
 	void Update ()
     {
         direction = new Vector2(Input.GetAxisRaw("Horizontal") * Acceleration, Input.GetAxisRaw("Vertical") * Acceleration);
+        if (Input.GetKeyDown("q")) {
+            mode = !mode;
+        }
     }
 
     private void FixedUpdate()

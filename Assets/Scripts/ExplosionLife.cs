@@ -4,9 +4,13 @@ using UnityEngine;
 
 public class ExplosionLife : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
 
+    public DamageInfo projectileDmgInfo;
+
+	// Use this for initialization
+	void Awake () {
+        DamageInfo expDmgInfo = gameObject.GetComponent<DamageInfo>();
+        
 	}
 	
 	// Update is called once per frame

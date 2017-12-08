@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 58515278902670054}
   - component: {fileID: 114134531204177046}
   - component: {fileID: 50478682964409246}
+  - component: {fileID: 114470579757533794}
   m_Layer: 0
   m_Name: LaserExplosion
   m_TagString: Untagged
@@ -107,6 +108,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bff284773ef3cbc4582931b517fe9d80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  projectileDmgInfo: {fileID: 114845529025473492, guid: d692e5542528d3244b8ba592c9ceab76,
+    type: 2}
+--- !u!114 &114470579757533794
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1284271125703222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fc7c62f1da5987488141935cde72558, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 0
+  mass: 0
+  isProjectile: 0
 --- !u!212 &212895521447716998
 SpriteRenderer:
   m_ObjectHideFlags: 1
