@@ -9,7 +9,6 @@ public class ProjectileController : MonoBehaviour{
     public GameObject explosion;
     public float destroingDelay;
     private Vector2 direction;
-    private float playerRotationZ;
     
 
     void Awake () {

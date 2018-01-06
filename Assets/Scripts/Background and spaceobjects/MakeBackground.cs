@@ -93,14 +93,7 @@ public class MakeBackground : MonoBehaviour {
                 mRenderer.sprite = Resources.Load(meteorSprites[meteorSprite], typeof(Sprite)) as Sprite;
                 mRenderer.sortingLayerName = "BackgroundObjects";
                 mGo.transform.SetParent(this.transform, false);
-                //GameObject mGo = Resources.Load("MeteorBig", typeof(GameObject)) as GameObject;
-                /*mGo.name = "BigMeteor" + (k).ToString(); ;
-                SpriteRenderer mRenderer = mGo.GetComponent<SpriteRenderer>();
-                mGo.transform.position = new Vector2(i * (2.5f) + 1.25f, j * (2.5f));
-                int meteorSprite = Random.Range(1, 8);
-                mRenderer.sprite = Resources.Load(meteorSprites[meteorSprite], typeof(Sprite)) as Sprite;
-                mRenderer.sortingLayerName = "BackgroundObjects";
-                mGo.transform.SetParent(this.transform, false);*/
+               
             }
         }
       

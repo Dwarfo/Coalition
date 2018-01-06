@@ -6,7 +6,7 @@ public class FireProjectile : MonoBehaviour {
 
     public GameObject Projectile;
     public GameObject firingPosition;
-    public PlayerMovementControl PMC;
+    public PlayerStateInput psi;
 
     // Use this for initialization
     void Start ()
@@ -25,9 +25,9 @@ public class FireProjectile : MonoBehaviour {
 
     void Fire()
     {
-        if (!PMC.mode)
+        if (!psi.getMode())
         {
-            GameObject firedProjectile = Instantiate(Projectile, firingPosition.transform.position, PMC.Player.transform.rotation);
+            GameObject firedProjectile = Instantiate(Projectile, firingPosition.transform.position, firingPosition.transform.rotation);
         }
         //SpriteRenderer mRenderer = firedProjectile.GetComponent<SpriteRenderer>();
        // firedProjectile.transform.SetParent(firingPosition.transform, false);

@@ -15,7 +15,8 @@ public class PlayerHealth : MonoBehaviour,IHealthPoint {
     public GameObject healthBar;
     public PlayerMovementControl PMC;
     private int colcounter = 0;
-	// Use this for initialization
+	
+
 	void Start ()
     {
         currentHeath = maxHealth;
@@ -27,37 +28,6 @@ public class PlayerHealth : MonoBehaviour,IHealthPoint {
 		
 	}
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.layer != 9)
-        {
-            DamageInfo dmgInfo = collision.gameObject.GetComponent<DamageInfo>();
-
-            //float damage = 1f * PMC.Player.velocity.magnitude;
-            if (!dmgInfo.isProjectile)
-            {
-                receiveDamage(dmgInfo.damage * PMC.Player.velocity.magnitude);
-            }
-            else
-            {
-                receiveDamage(dmgInfo.damage);
-            }
-            Debug.Log("Hit!" + dmgInfo.damage.ToString());
-        }
-    }
-
-    private void OnCollisionStay2D(Collision2D collision)
-    {
-        colcounter++;
-        if (colcounter == 10 && collision.gameObject.layer != 9)
-        {
-            DamageInfo dmgInfo = collision.gameObject.GetComponent<DamageInfo>();
-
-            receiveDamage(dmgInfo.damage);
-            Debug.Log("Hit!" + dmgInfo.damage.ToString());
-        }
-
-    }
 
     public void receiveDamage(float damage)
     {

@@ -10,7 +10,7 @@ public class CameraControlls : MonoBehaviour {
     public MakeBackground mb;
     public float smoothTime = 0.2f;
     public float maxSmoothSpeed = 5f;
-    private PlayerMovementControl PMC;
+
     private Vector3 newPosition;
 
     //Clamp values
@@ -23,7 +23,6 @@ public class CameraControlls : MonoBehaviour {
     void Start ()
     {
         computeClamps();
-        PMC = player.gameObject.GetComponent<PlayerMovementControl>();
 	}
 
     void computeClamps()
@@ -40,10 +39,7 @@ public class CameraControlls : MonoBehaviour {
     {
         //Vector3 newPosition = new Vector3(player.position.x,player.position.y, transform.position.z);
         //Computing and updating Camera position
-        if(PMC.mode)
-           newPosition = new Vector3(Mathf.Clamp(player.position.x, minX, maxX), Mathf.Clamp(player.position.y, minY, maxY), transform.position.z);
-        else
-           newPosition = new Vector3(Mathf.Clamp(player.position.x, minX, maxX), Mathf.Clamp(player.position.y, minY, maxY), transform.position.z);
+        newPosition = new Vector3(Mathf.Clamp(player.position.x, minX, maxX), Mathf.Clamp(player.position.y, minY, maxY), transform.position.z);
         //Camera.main.ScreenToWorldPoint(Input.mousePosition) - tr.position
         transform.position = newPosition;
     }

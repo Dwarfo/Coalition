@@ -8,29 +8,23 @@ public class PlayerMovementControl : MonoBehaviour {
     public float topSpeed = 10f;
     public float Acceleration = 10f;
     public float rotSpeed = 10f;
-    public bool mode = true;
 
+    private bool mode = true;
     private int dragValue = 10;
-    //Mode will be provided by PlayerState class
     private Vector2 direction;
 
-	// Use this for initialization
 	void Start () {
 		
 	}
-	
-	// Update is called once per frame
-	void Update ()
+    
+    void Update()
     {
         direction = new Vector2(Input.GetAxisRaw("Horizontal") * Acceleration, Input.GetAxisRaw("Vertical") * Acceleration);
-        if (Input.GetKeyDown("q")) {
-            mode = !mode;
-        }
+
     }
 
     private void FixedUpdate()
     {
-        //Player.velocity = direction;
         modeFly(direction);
        
     }
@@ -51,7 +45,7 @@ public class PlayerMovementControl : MonoBehaviour {
 
         Player.AddForce(direction);
         Player.velocity = clampVelocity(speedKoef);
-        //Debug.Log(Player.velocity);
+       
 
         if (Player.velocity.x != 0 && direction.x == 0 && direction.y !=0)
             Player.velocity = new Vector2(Mathf.Lerp(Player.velocity.x, 0, 0.2f), Player.velocity.y);
@@ -104,8 +98,6 @@ public class PlayerMovementControl : MonoBehaviour {
         if (direction.x != 0 && direction.y != 0)
         {
             angle = (xAngle + yAngle) / 2;
-            //Debug.Log("Rotation x=" + xAngle.ToString() + " , y =" + yAngle.ToString());
-            //Debug.Log("Direction x=" + direction.x.ToString() + " , y =" + direction.y.ToString());
         }
         //Make sure you don't rotate when there is no input
         if (direction != Vector2.zero)
@@ -120,4 +112,12 @@ public class PlayerMovementControl : MonoBehaviour {
         float rotation_z = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg - 90;
         tr.rotation = Quaternion.Euler(0f, 0f, rotation_z);
     }
+
+
+    public void changeMode()
+    {
+        this.mode = !this.mode;
+    }
+    
+
 }
