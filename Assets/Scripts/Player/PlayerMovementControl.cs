@@ -110,7 +110,7 @@ public class PlayerMovementControl : MonoBehaviour {
         Vector3 difference = Camera.main.ScreenToWorldPoint(Input.mousePosition) - tr.position;
         difference.Normalize();
         float rotation_z = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg - 90;
-        tr.rotation = Quaternion.Euler(0f, 0f, rotation_z);
+        tr.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0f, 0f, rotation_z), Time.deltaTime * 5f);
     }
 
 
