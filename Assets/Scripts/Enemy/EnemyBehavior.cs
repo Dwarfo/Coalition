@@ -13,7 +13,7 @@ public class EnemyBehavior : MonoBehaviour {
     [SerializeField]
     private Transform targetObject;
     private Rigidbody2D enemy;
-
+    private Vector2 direction;
 
     void Start ()
     {
@@ -28,12 +28,14 @@ public class EnemyBehavior : MonoBehaviour {
         if (targetObject != null)
         {
             enemy.drag = 0;
-            Vector2 direction = (targetObject.position - transform.position).normalized;
-            lookAtTarget(direction);
-            chaseTarget(direction);
+            direction = (targetObject.position - transform.position).normalized;
+            lookAtTarget();
+            chaseTarget();
+
         }
         else
             enemy.drag = dragValue;
+        
 	}
 
     private void OnDrawGizmosSelected()
@@ -42,18 +44,18 @@ public class EnemyBehavior : MonoBehaviour {
         Gizmos.DrawWireSphere(transform.position,aggroRadius);
     }
 
-    private void lookAtTarget(Vector2 direction)
+    private void lookAtTarget()
     {
         float rotation_z = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg + 90;
         Quaternion rotation = Quaternion.AngleAxis(rotation_z, Vector3.forward);
         transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * 5f);
     }
 
-    private void chaseTarget(Vector2 direction)
+    private void chaseTarget()
     {
         float distance = Vector2.Distance(gameObject.transform.position, targetObject.position);
         float koef;
-        if (distance >= 5f)
+        if (distance >= 4f)
         {
             koef = topSpeed;
         }
@@ -83,6 +85,7 @@ public class EnemyBehavior : MonoBehaviour {
             //Debug.Log("I see Player");
             targetObject = target;
         }
+
     }
 
     private void OnTriggerExit2D(Collider2D collision)

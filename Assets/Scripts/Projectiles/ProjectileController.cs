@@ -8,18 +8,21 @@ public class ProjectileController : MonoBehaviour{
     public Rigidbody2D projectile;
     public GameObject explosion;
     public float destroingDelay;
+
     private Vector2 direction;
+    private ProjectileNotificator projectileNotificator;
     
 
     void Awake () {
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         projectile.AddForce(player.transform.up * projectileSpeed, ForceMode2D.Impulse);
         Destroy(gameObject, destroingDelay);
+        projectileNotificator = gameObject.GetComponent<ProjectileNotificator>();
 	}
 
     private void OnCollisionEnter2D(Collision2D collision)
     {   
-        getDestroyed(collision);
+        getDestroyed();
     }
 	
 	void Update () {
@@ -31,10 +34,15 @@ public class ProjectileController : MonoBehaviour{
        //I should have made 2 interfaces =(
     }
 
-    public void getDestroyed(Collision2D collision)
+    private void OnDestroy()
     {
-        //if(collision)
-        GameObject expl = Instantiate(explosion, transform.position,transform.rotation) as GameObject;
+        GameObject expl = Instantiate(explosion, transform.position, transform.rotation) as GameObject;
+        projectileNotificator.OnDestruction(new OnDestructionEventArgs(gameObject.transform));
+        Destroy(gameObject);
+    }
+
+    public void getDestroyed()
+    {
         Destroy(gameObject);
     }
 }
