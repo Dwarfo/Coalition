@@ -71,7 +71,7 @@ public class EnemyMovement : MonoBehaviour {
         {
             // If enemy has engaged player, he starts using his stances
             enemy.drag = dragValue;
-            behavior.run();
+            behavior.run(direction);
         }
         enemy.AddForce(direction * koef);
         enemy.velocity = Mathematical.clampVelocity(enemy, topSpeed);

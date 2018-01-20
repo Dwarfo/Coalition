@@ -51,7 +51,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4164705578978160}
   - component: {fileID: 212013666944824816}
-  - component: {fileID: 95055268102775216}
+  - component: {fileID: 82289399256337052}
   - component: {fileID: 50012512765274312}
   - component: {fileID: 58007213628444414}
   - component: {fileID: 114146403796470380}
@@ -134,7 +134,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1189432249195840}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2.5, y: 2.5, z: 1}
   m_Children: []
   m_Father: {fileID: 4164705578978160}
@@ -175,23 +175,86 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.4
---- !u!95 &95055268102775216
-Animator:
-  serializedVersion: 3
+--- !u!82 &82289399256337052
+AudioSource:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1701129324709588}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 8133d22eed50e744cbdf56b86bd712f0, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!95 &95973436439153934
 Animator:
   serializedVersion: 3
@@ -221,7 +284,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Projectile: {fileID: 1854150772865208, guid: d692e5542528d3244b8ba592c9ceab76, type: 2}
-  firingPosition: {fileID: 1686496286137854}
+  firingPosition: {fileID: 4024080368481688}
 --- !u!114 &114146403796470380
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -264,7 +327,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pmc: {fileID: 114146403796470380}
   shieldControl: {fileID: 114837661649387802}
-  playerFiring: {fileID: 0}
+  playerFiring: {fileID: 114132384548879804}
+  shooting:
+  - {fileID: 8300000, guid: 952118d427ea76e4c8da149165b09192, type: 3}
+  - {fileID: 8300000, guid: 911fabda4fd17924c96388166debff78, type: 3}
+  - {fileID: 8300000, guid: 3f1a045dcf6cf314eaec633e037b3058, type: 3}
+  - {fileID: 8300000, guid: 43c7eaccda95ede4b90078633b7b2373, type: 3}
+  - {fileID: 8300000, guid: 07c2f7292a0bd534a853901a736dc133, type: 3}
 --- !u!114 &114817619215405202
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -310,7 +379,6 @@ MonoBehaviour:
   currentHeath: 0
   armor: 5
   healthBar: {fileID: 0}
-  PMC: {fileID: 114146403796470380}
 --- !u!212 &212013666944824816
 SpriteRenderer:
   m_ObjectHideFlags: 1

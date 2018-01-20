@@ -6,6 +6,7 @@ public class PirateBehavior : MonoBehaviour, IEnemyBehavior {
 
     public Rigidbody2D enemy;
     public FireProjectile fireProjectile;
+    public PlaySoundOnFire fireAudioSource;
 
     private int shootCounter;
     private int dashCounter;
@@ -34,14 +35,22 @@ public class PirateBehavior : MonoBehaviour, IEnemyBehavior {
             rotate(koef);
     }
 
-    public void run()
+    public void run(Vector2 direction)
     {
         targetObject = gameObject.GetComponent<EnemyMovement>().getTarget();
+
+        float distance = Vector2.Distance(gameObject.transform.position, targetObject.position);
+
+        if (distance <= 3f)
+        {
+            enemy.AddForce(-1 * direction * 5, ForceMode2D.Impulse);
+        }
+
         int random = Random.Range(0,100);
 
         if (random < 10 && shootCounter == 0)
         {
-            fireProjectile.Fire();
+            enemyFire();
             shootCounter++;
         }
 
@@ -104,7 +113,13 @@ public class PirateBehavior : MonoBehaviour, IEnemyBehavior {
         for (int i = 0; i < 3; i++)
         {
             yield return new WaitForSeconds(0.1f);
-            fireProjectile.Fire();
+            enemyFire();
         }
+    }
+
+    private void enemyFire()
+    {
+        fireProjectile.Fire();
+        fireAudioSource.playSound();
     }
 }

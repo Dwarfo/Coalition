@@ -10,7 +10,7 @@ public class ProjectileController : MonoBehaviour{
     public float destroingDelay;
     
     private ProjectileNotificator projectileNotificator;
-    
+
 
     void Awake ()
     {
