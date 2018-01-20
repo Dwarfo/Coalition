@@ -8,6 +8,7 @@ public class PlayerStateInput : MonoBehaviour {
     private bool mode;
     public PlayerMovementControl pmc;
     public ShieldControlls shieldControl;
+    public FireProjectile playerFiring;
     public IHealthPoint playerHealth;
 
 	void Start () {
@@ -25,6 +26,12 @@ public class PlayerStateInput : MonoBehaviour {
         if (Input.GetKeyDown("e"))
         {
             shieldControl.setShield();
+        }
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            if(!pmc.showMode())
+            playerFiring.Fire();
         }
     }
 

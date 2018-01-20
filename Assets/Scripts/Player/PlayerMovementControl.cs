@@ -10,11 +10,13 @@ public class PlayerMovementControl : MonoBehaviour {
     public float rotSpeed = 10f;
 
     private bool mode = true;
+    private float modeSpeed;
     private int dragValue = 10;
     private Vector2 direction;
 
-	void Start () {
-		
+	void Start ()
+    {
+        modeSpeed = topSpeed * 0.7f;
 	}
     
     void Update()
@@ -32,19 +34,15 @@ public class PlayerMovementControl : MonoBehaviour {
     private void modeFly(Vector2 direction)
     {
         //Depending on mode, topSpeed and direction addForce to move player
-        int speedKoef;
-        if (mode)
+        float speed = topSpeed;
+        if (!mode)
         {
-            speedKoef = 1;
-        }
-        else
-        {
-            speedKoef = 2;
             direction = direction / 2;
+            speed = modeSpeed;
         }
 
         Player.AddForce(direction);
-        Player.velocity = clampVelocity(speedKoef);
+        Player.velocity = Mathematical.clampVelocity(Player, speed);
        
 
         if (Player.velocity.x != 0 && direction.x == 0 && direction.y !=0)
@@ -60,19 +58,10 @@ public class PlayerMovementControl : MonoBehaviour {
         if (mode)
             Rotate(Player.transform, direction);
         else
-            BRotate(Player.transform);
+            Mathematical.RotateTowards(transform, Camera.main.ScreenToWorldPoint(Input.mousePosition), -90);
+            //BRotate(Player.transform);
     }
 
-
-
-    private Vector2 clampVelocity(int modeKoef)
-    {
-        // clamp between topSpeed negative and positive values depending on mode
-        float x = Mathf.Clamp(Player.velocity.x, -topSpeed / modeKoef, topSpeed / modeKoef);
-        float y = Mathf.Clamp(Player.velocity.y, -topSpeed / modeKoef, topSpeed / modeKoef);
-
-        return new Vector2(x, y);
-    }
 
     private void Rotate(Transform tr, Vector2 direction)
     {
@@ -105,18 +94,14 @@ public class PlayerMovementControl : MonoBehaviour {
 
     }
 
-    private void BRotate(Transform tr)
-    {
-        Vector3 difference = Camera.main.ScreenToWorldPoint(Input.mousePosition) - tr.position;
-        difference.Normalize();
-        float rotation_z = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg - 90;
-        tr.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0f, 0f, rotation_z), Time.deltaTime * 5f);
-    }
-
-
     public void changeMode()
     {
         this.mode = !this.mode;
+    }
+
+    public bool showMode()
+    {
+        return mode;
     }
     
 

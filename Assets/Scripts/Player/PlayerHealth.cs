@@ -13,7 +13,6 @@ public class PlayerHealth : MonoBehaviour,IHealthPoint {
     private float currentHeath;
     public int armor = 5;
     public GameObject healthBar;
-    public PlayerMovementControl PMC;
     private int colcounter = 0;
 	
 
@@ -37,7 +36,6 @@ public class PlayerHealth : MonoBehaviour,IHealthPoint {
         if (currentHeath < 0)
         {
             getDestroyed();
-            PMC.enabled = false;
         }
 
         healthBar.transform.position = new Vector3(xVec, healthBar.transform.position.y, healthBar.transform.position.z);

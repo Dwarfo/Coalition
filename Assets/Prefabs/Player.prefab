@@ -134,7 +134,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1189432249195840}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0.1}
   m_LocalScale: {x: 2.5, y: 2.5, z: 1}
   m_Children: []
   m_Father: {fileID: 4164705578978160}
@@ -222,7 +222,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Projectile: {fileID: 1854150772865208, guid: d692e5542528d3244b8ba592c9ceab76, type: 2}
   firingPosition: {fileID: 1686496286137854}
-  psi: {fileID: 114502307067981584}
 --- !u!114 &114146403796470380
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -265,6 +264,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pmc: {fileID: 114146403796470380}
   shieldControl: {fileID: 114837661649387802}
+  playerFiring: {fileID: 0}
 --- !u!114 &114817619215405202
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -6,6 +6,7 @@ public class DodgingMissiles : MonoBehaviour {
 
     public int speedKoef = 4;
     public float topSpeed = 10;
+    public float reactionDistance = 3f;
 
     private List<Transform> dangers = new List<Transform>();
     [SerializeField]
@@ -32,16 +33,16 @@ public class DodgingMissiles : MonoBehaviour {
         {
             Vector3 direction = (pos.position - transform.position).normalized;
             float distance = Vector2.Distance(gameObject.transform.position, pos.position);
-            if (distance <= 3f)
+            if (distance <= reactionDistance)
             {
-                koef = -10 * 3;
+                koef = -topSpeed * speedKoef;
             }
             else
             {
                 koef = 0;
             }
             character.AddForce(direction * koef);
-            character.velocity = Mathematical.clampVelocity(speedKoef / 4,gameObject.GetComponent<Rigidbody2D>(),topSpeed);
+            character.velocity = Mathematical.clampVelocity(gameObject.GetComponent<Rigidbody2D>(),topSpeed);
         }
 
     }
