@@ -9,6 +9,7 @@ public class PlayerStateInput : MonoBehaviour {
     public FireProjectile playerFiring;
     public IHealthPoint playerHealth;
     public AudioClip[] shooting;
+    public AudioClip shieldsUp;
 
     private bool shieldActive;
     private bool mode;
@@ -30,6 +31,7 @@ public class PlayerStateInput : MonoBehaviour {
         if (Input.GetKeyDown("e"))
         {
             shieldControl.setShield();
+            audioSource.PlayOneShot(shieldsUp);
         }
 
         if (Input.GetMouseButtonDown(0))
