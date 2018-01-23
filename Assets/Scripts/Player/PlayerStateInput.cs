@@ -8,16 +8,13 @@ public class PlayerStateInput : MonoBehaviour {
     public ShieldControlls shieldControl;
     public FireProjectile playerFiring;
     public IHealthPoint playerHealth;
-    public AudioClip[] shooting;
-    public AudioClip shieldsUp;
-
+    
     private bool shieldActive;
     private bool mode;
-    private AudioSource audioSource;
 
     void Start ()
     {
-        audioSource = gameObject.GetComponent<AudioSource>();	
+       
 	}
 	
 	// Update is called once per frame
@@ -31,15 +28,13 @@ public class PlayerStateInput : MonoBehaviour {
         if (Input.GetKeyDown("e"))
         {
             shieldControl.setShield();
-            audioSource.PlayOneShot(shieldsUp);
+            
         }
 
         if (Input.GetMouseButtonDown(0))
         {
             if(!pmc.showMode())
             playerFiring.Fire();
-            int randomClip = Random.Range(0, 4);
-            audioSource.PlayOneShot(shooting[randomClip]);
         }
     }
 

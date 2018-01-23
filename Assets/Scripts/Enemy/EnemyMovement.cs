@@ -14,6 +14,7 @@ public class EnemyMovement : MonoBehaviour {
     //public IEnemyBehavior behavior;
     public PirateBehavior behavior;
     public AudioSource audioSource;
+    public AudioClip running;
 
     [SerializeField]
     private Transform targetObject;
@@ -85,7 +86,7 @@ public class EnemyMovement : MonoBehaviour {
         {
             //Debug.Log("I see Player");
             targetObject = target;
-            audioSource.Play();
+            //audioSource.Play();
         }
 
 
@@ -98,7 +99,10 @@ public class EnemyMovement : MonoBehaviour {
         {
             targetObject = null;
             audioSource.Stop();
+            audioSource.volume = 0.05f;
+            //audioSource.PlayOneShot(running);
         }
+        
     }
 
     public Transform getTarget()

@@ -6,7 +6,6 @@ public class PirateBehavior : MonoBehaviour, IEnemyBehavior {
 
     public Rigidbody2D enemy;
     public FireProjectile fireProjectile;
-    public PlaySoundOnFire fireAudioSource;
 
     private int shootCounter;
     private int dashCounter;
@@ -14,12 +13,10 @@ public class PirateBehavior : MonoBehaviour, IEnemyBehavior {
     private int koef;
     private Transform targetObject;
     [SerializeField]
-    private bool rotating;
     private IEnumerator coroutine;
 
     void Start ()
     {
-        rotating = false;
         shootCounter = 0;
         dashCounter = 0;
         rotCounter = 0;
@@ -31,8 +28,7 @@ public class PirateBehavior : MonoBehaviour, IEnemyBehavior {
 	// Update is called once per frame
 	void Update ()
     {
-        if (rotating)
-            rotate(koef);
+
     }
 
     public void run(Vector2 direction)
@@ -65,17 +61,11 @@ public class PirateBehavior : MonoBehaviour, IEnemyBehavior {
             StartCoroutine(coroutine);
         }
 
-        if (random >= 58 && random <= 60 && rotCounter == 0 && !rotating)
+        /*if (random >= 58 && random <= 60 && rotCounter == 0 && !rotating)
         {
-            if (random > 59)
-                koef = -1;
-            else
-                koef = 1;
-            rotating = true;
-            Invoke("changeRot",2);
-            rotCounter++;
-                
-        }
+            coroutine = circle(random);
+            StartCoroutine(coroutine);
+        }*/
 
         iterateCounter(ref shootCounter, Random.Range(60, 180), true);
         iterateCounter(ref dashCounter, 180, true);
@@ -100,7 +90,7 @@ public class PirateBehavior : MonoBehaviour, IEnemyBehavior {
 
     private void changeRot()
     {
-        this.rotating = false;
+        
     }
 
     private void rotate(int koef)
@@ -117,9 +107,19 @@ public class PirateBehavior : MonoBehaviour, IEnemyBehavior {
         }
     }
 
+    private IEnumerator circle(int random)
+    {
+        if (random > 59)
+            koef = -1;
+        else
+            koef = 1;
+
+        transform.RotateAround(targetObject.position, transform.forward, koef * 1f);
+        yield return new WaitForSeconds(2f);
+    }
+
     private void enemyFire()
     {
         fireProjectile.Fire();
-        fireAudioSource.playSound();
     }
 }

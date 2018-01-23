@@ -6,11 +6,14 @@ public class FireProjectile : MonoBehaviour {
 
     public GameObject Projectile;
     public Transform firingPosition;
+    public AudioClip[] shooting;
+
+    private AudioSource audioSource;
 
     // Use this for initialization
     void Start ()
     {
-        
+        audioSource = gameObject.GetComponent<AudioSource>();
 	}
 	
 	// Update is called once per frame
@@ -22,5 +25,7 @@ public class FireProjectile : MonoBehaviour {
     public void Fire()
     {
             GameObject firedProjectile = Instantiate(Projectile, firingPosition.position, firingPosition.rotation);
+            int randomClip = Random.Range(0, 4);
+            audioSource.PlayOneShot(shooting[randomClip]);
     }
 }

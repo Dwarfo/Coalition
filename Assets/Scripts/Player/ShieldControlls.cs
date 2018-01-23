@@ -10,7 +10,9 @@ public class ShieldControlls : MonoBehaviour, IHealthPoint
     public GameObject shieldBar;
     public GameObject shield;
     public Transform backgroundTransform;
+    public AudioClip shieldsUp;
 
+    private AudioSource audioSource;
     private Animator shieldAnim;
     [SerializeField]
     private float currentShield;
@@ -31,7 +33,8 @@ public class ShieldControlls : MonoBehaviour, IHealthPoint
         regenTime = 0;
         shieldActive = false;
         shieldAnim = shield.GetComponent<Animator>();
-	}
+        audioSource = gameObject.GetComponent<AudioSource>();
+    }
 	
 	// Update is called once per frame
 	void Update ()
@@ -69,7 +72,8 @@ public class ShieldControlls : MonoBehaviour, IHealthPoint
         if(!broken)
             shieldActive = !shieldActive;
 
-        
+        audioSource.PlayOneShot(shieldsUp);
+
     }
 
     public void receiveDamage(float damage)

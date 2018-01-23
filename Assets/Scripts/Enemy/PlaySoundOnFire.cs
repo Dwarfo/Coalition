@@ -5,7 +5,9 @@ using UnityEngine;
 public class PlaySoundOnFire : MonoBehaviour {
 
     public AudioClip[] shooting;
+
     private AudioSource audioSource;
+
     // Use this for initialization
     void Start ()
     {
