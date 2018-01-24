@@ -6,34 +6,43 @@ public class PirateBehavior : MonoBehaviour, IEnemyBehavior {
 
     public Rigidbody2D enemy;
     public FireProjectile fireProjectile;
+    public int difficultySettings = 1;
 
     private int shootCounter;
     private int dashCounter;
     private int rotCounter;
     private int koef;
-    private Transform targetObject;
-    [SerializeField]
+    private bool rotating;
     private IEnumerator coroutine;
+
+    private Dictionary<string,Counter> counters;
+    private Counter currentCounter;
+
 
     void Start ()
     {
+        Mathf.Clamp(difficultySettings,1,4);
         shootCounter = 0;
         dashCounter = 0;
         rotCounter = 0;
+        rotating = false;
         enemy = gameObject.GetComponent<Rigidbody2D>();
         if (fireProjectile == null)
             fireProjectile = gameObject.GetComponent<FireProjectile>();
-	}
-	
-	// Update is called once per frame
+        counters = new Dictionary<string, Counter>();
+        counters.Add("shootCounter", new Counter(120 / difficultySettings));
+        counters.Add("dashCounter", new Counter(180 / difficultySettings));
+        counters.Add("rotCounter", new Counter(360 / difficultySettings));
+
+    }
+
 	void Update ()
     {
 
     }
 
-    public void run(Vector2 direction)
+    public void run(Vector2 direction, Transform targetObject)
     {
-        targetObject = gameObject.GetComponent<EnemyMovement>().getTarget();
 
         float distance = Vector2.Distance(gameObject.transform.position, targetObject.position);
 
@@ -44,33 +53,42 @@ public class PirateBehavior : MonoBehaviour, IEnemyBehavior {
 
         int random = Random.Range(0,100);
 
-        if (random < 10 && shootCounter == 0)
+        currentCounter = counters["shootCounter"];
+        if (currentCounter.getCountStatus())
         {
             enemyFire();
-            shootCounter++;
+            currentCounter.setCap(Random.Range(80/difficultySettings, 200/difficultySettings));
+            currentCounter++;
         }
 
-        if (random > 90 && dashCounter == 0)
+        currentCounter = counters["dashCounter"];
+
+        if (currentCounter.getCountStatus())
         {
-            if (random > 95)
+            if (random > 50)
                 enemy.AddForce(transform.right * 40, ForceMode2D.Impulse);
             else
                 enemy.AddForce(-transform.right * 40, ForceMode2D.Impulse);
-            dashCounter++;
+            currentCounter.setCap(Random.Range(120 / difficultySettings, 300 / difficultySettings));
+            currentCounter++;
             coroutine = dashStrike();
             StartCoroutine(coroutine);
         }
 
-        /*if (random >= 58 && random <= 60 && rotCounter == 0 && !rotating)
+        currentCounter = counters["rotCounter"];
+
+        if (currentCounter.getCountStatus())
         {
             coroutine = circle(random);
             StartCoroutine(coroutine);
-        }*/
+            currentCounter.setCap(Random.Range(240 / difficultySettings, 500 / difficultySettings));
+            currentCounter++;
+        }
 
-        iterateCounter(ref shootCounter, Random.Range(60, 180), true);
-        iterateCounter(ref dashCounter, 180, true);
-        iterateCounter(ref rotCounter, 360, true);
+        if (rotating)
+            rotate(koef, targetObject);
 
+        iterateCounters();
     }
 
     public void stop()
@@ -78,29 +96,22 @@ public class PirateBehavior : MonoBehaviour, IEnemyBehavior {
         throw new System.NotImplementedException();
     }
 
-    private void iterateCounter(ref int counter, int cap, bool iterate)
+    private void iterateCounters()
     {
-        if (counter != 0 && iterate)
+        foreach (KeyValuePair<string, Counter> ctr in counters)
         {
-            counter++;
-            if (counter >= cap)
-                counter = 0;
+            ctr.Value.iterateCounter();
         }
     }
 
-    private void changeRot()
+    private void rotate(int koef, Transform targetObject)
     {
-        
-    }
-
-    private void rotate(int koef)
-    {
-        transform.RotateAround(targetObject.position, transform.forward, koef*1f);
+        transform.RotateAround(targetObject.position, transform.forward, koef * (1 + difficultySettings/2));
     }
 
     private IEnumerator dashStrike()
     {
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < 3 + difficultySettings/2; i++)
         {
             yield return new WaitForSeconds(0.1f);
             enemyFire();
@@ -109,13 +120,14 @@ public class PirateBehavior : MonoBehaviour, IEnemyBehavior {
 
     private IEnumerator circle(int random)
     {
-        if (random > 59)
+        if (random > 50)
             koef = -1;
         else
             koef = 1;
 
-        transform.RotateAround(targetObject.position, transform.forward, koef * 1f);
-        yield return new WaitForSeconds(2f);
+        rotating = true;
+        yield return new WaitForSeconds(3f);
+        rotating = false;
     }
 
     private void enemyFire()

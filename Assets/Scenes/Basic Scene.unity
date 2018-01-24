@@ -1279,7 +1279,13 @@ Prefab:
       propertyPath: running
       value: 
       objectReference: {fileID: 8300000, guid: 74f3603f2f5425a4ab5e44c4ea34e443, type: 3}
-    m_RemovedComponents: []
+    - target: {fileID: 114327565710200880, guid: 4314ab8e9c8d58d48bb473d9a44b82e1,
+        type: 2}
+      propertyPath: difficultySettings
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 114674638612214410, guid: 4314ab8e9c8d58d48bb473d9a44b82e1, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 4314ab8e9c8d58d48bb473d9a44b82e1, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &2093735672

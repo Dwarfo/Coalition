@@ -4,6 +4,6 @@ using UnityEngine;
 
 public interface IEnemyBehavior  {
 
-    void run(Vector2 direction);
+    void run(Vector2 direction, Transform targetObject);
     void stop();
 }
