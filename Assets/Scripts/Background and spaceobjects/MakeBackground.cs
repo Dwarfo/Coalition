@@ -9,6 +9,7 @@ public class MakeBackground : MonoBehaviour {
     public int width = 10;
     public int heigth = 10;
     public GameObject BigMeteor;
+    public int numberOfPirates;
 
 	// Use this for initialization
 	void Start ()
@@ -25,7 +26,8 @@ public class MakeBackground : MonoBehaviour {
             }
         }
 
-        CreateBounds();      
+        CreateBounds();
+        SpawnPirates();
     }
 
     void CreateBounds()
@@ -59,7 +61,9 @@ public class MakeBackground : MonoBehaviour {
         bColliders[1].size = new Vector2(width * 2.5f, 1);
         bColliders[2].size = new Vector2(1, heigth * 2.5f);
         bColliders[3].size = new Vector2(width * 2.5f, 1);
-        
+
+        Time.timeScale = 0;
+        PlayerStateInput.gamePaused = true;
     }
 
     void CreateBackgroundTile(int i,int j, int k)
@@ -98,7 +102,14 @@ public class MakeBackground : MonoBehaviour {
         }
       
     }
-	
+
+    private void SpawnPirates()
+    {
+
+
+    }
+
+
 	void Update () {
 		
 	}

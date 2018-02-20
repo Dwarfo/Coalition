@@ -13,6 +13,9 @@ public class PlayerHealth : MonoBehaviour,IHealthPoint {
     private float currentHeath;
     public int armor = 5;
     public GameObject healthBar;
+    public GameObject gameOverText;
+    public GameObject explosion;
+
     private int colcounter = 0;
 	
 
@@ -43,6 +46,8 @@ public class PlayerHealth : MonoBehaviour,IHealthPoint {
 
     public void getDestroyed()
     {
-        Debug.Log("GAME OVER!");
+        GameObject expl = Instantiate(explosion, transform.position, transform.rotation) as GameObject;
+        gameOverText.SetActive(true);
+        Destroy(gameObject);
     }
 }

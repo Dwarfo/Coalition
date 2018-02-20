@@ -89,7 +89,6 @@ public class EnemyMovement : MonoBehaviour {
             //audioSource.Play();
         }
 
-
     }
 
     private void OnTriggerExit2D(Collider2D collision)

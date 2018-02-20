@@ -8,18 +8,25 @@ public class PlayerStateInput : MonoBehaviour {
     public ShieldControlls shieldControl;
     public FireProjectile playerFiring;
     public IHealthPoint playerHealth;
-    
+    public GameObject Background;
+    public static bool gamePaused;
+
     private bool shieldActive;
     private bool mode;
 
+
     void Start ()
     {
-       
+        gamePaused = false;
 	}
 	
 	// Update is called once per frame
 	void Update () {
 
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Pause();
+        }
         if (Input.GetKeyDown("q"))
         {
             pmc.changeMode();
@@ -45,5 +52,20 @@ public class PlayerStateInput : MonoBehaviour {
     public bool getShieldStatus()
     {
         return shieldActive;
+    }
+
+    private void Pause()
+    {
+        if (!gamePaused)
+        {
+            Time.timeScale = 0;
+        }
+        else
+        {
+            Time.timeScale = 1;
+        }
+
+        gamePaused = !gamePaused;
+        Background.SetActive(gamePaused);
     }
 }
