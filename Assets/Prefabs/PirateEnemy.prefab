@@ -36,7 +36,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4554726436084762}
   - component: {fileID: 82343439955370132}
-  - component: {fileID: 114674638612214410}
   m_Layer: 0
   m_Name: FirePosition
   m_TagString: Untagged
@@ -64,6 +63,7 @@ GameObject:
   - component: {fileID: 114327565710200880}
   - component: {fileID: 114954907303051604}
   - component: {fileID: 114021471560141062}
+  - component: {fileID: 114951732290970038}
   m_Layer: 0
   m_Name: PirateEnemy
   m_TagString: Untagged
@@ -78,7 +78,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1997795791674450}
   m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 36.93, y: 21.75, z: 0}
+  m_LocalPosition: {x: 44.428673, y: 29.965466, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4554726436084762}
@@ -365,8 +365,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemy: {fileID: 50184126536378486}
   fireProjectile: {fileID: 114349032419210444}
-  fireAudioSource: {fileID: 114674638612214410}
-  rotating: 0
+  difficultySettings: 2
 --- !u!114 &114349032419210444
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -380,6 +379,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Projectile: {fileID: 1854150772865208, guid: d692e5542528d3244b8ba592c9ceab76, type: 2}
   firingPosition: {fileID: 4554726436084762}
+  shooting:
+  - {fileID: 8300000, guid: 952118d427ea76e4c8da149165b09192, type: 3}
+  - {fileID: 8300000, guid: 911fabda4fd17924c96388166debff78, type: 3}
+  - {fileID: 8300000, guid: 3f1a045dcf6cf314eaec633e037b3058, type: 3}
+  - {fileID: 8300000, guid: 43c7eaccda95ede4b90078633b7b2373, type: 3}
+  - {fileID: 8300000, guid: 07c2f7292a0bd534a853901a736dc133, type: 3}
 --- !u!114 &114439063707383910
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -391,31 +396,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61e06f31d6b89b149b98a95e93f7dc12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  aggroRadius: 20
-  speedKoef: 2
-  topSpeed: 10
+  aggroRadius: 30
+  speedKoef: 1
+  topSpeed: 15
   dragValue: 5
-  engageDistance: 6
+  engageDistance: 8
   behavior: {fileID: 114327565710200880}
   audioSource: {fileID: 82818505479570450}
+  running: {fileID: 8300000, guid: 74f3603f2f5425a4ab5e44c4ea34e443, type: 3}
   targetObject: {fileID: 0}
---- !u!114 &114674638612214410
+--- !u!114 &114951732290970038
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1763275748802976}
+  m_GameObject: {fileID: 1997795791674450}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ebfaf5f97731ca478250630a070a6ef, type: 3}
+  m_Script: {fileID: 11500000, guid: 35c82e0cb19e28b40885ea807f577a73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shooting:
-  - {fileID: 8300000, guid: 952118d427ea76e4c8da149165b09192, type: 3}
-  - {fileID: 8300000, guid: 911fabda4fd17924c96388166debff78, type: 3}
-  - {fileID: 8300000, guid: 3f1a045dcf6cf314eaec633e037b3058, type: 3}
-  - {fileID: 8300000, guid: 43c7eaccda95ede4b90078633b7b2373, type: 3}
-  - {fileID: 8300000, guid: 07c2f7292a0bd534a853901a736dc133, type: 3}
 --- !u!114 &114954907303051604
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Mathematical : MonoBehaviour {
 
+    public static int worldSize;
+
+
     public static Vector2 clampVelocity( Rigidbody2D character, float topSpeed)
     {
         // clamp between topSpeed negative and positive values depending on mode

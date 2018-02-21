@@ -4,16 +4,24 @@ using UnityEngine;
 
 public class MakeBackground : MonoBehaviour {
 
+    public NumberOfPirates pirateNumbers;
     public SpriteRenderer background = new SpriteRenderer();
     public SpriteRenderer objects = new SpriteRenderer();
-    public int width = 10;
-    public int heigth = 10;
+    public int width;
+    public int heigth;
     public GameObject BigMeteor;
-    public int numberOfPirates;
+    public GameObject Pirate;
 
-	// Use this for initialization
-	void Start ()
+    private List<PirateSpawnPoint> spawnPoints = new List<PirateSpawnPoint>();
+
+
+    // Use this for initialization
+    void Start ()
     {
+        width = Mathematical.worldSize;
+        heigth = Mathematical.worldSize;
+
+        spawnPoints.Add(new PirateSpawnPoint());
         int k = 0;
 
         for (int i = 0; i < width; i++)
@@ -106,6 +114,18 @@ public class MakeBackground : MonoBehaviour {
     private void SpawnPirates()
     {
 
+        int numberOfPirates = width / 20;
+
+        for (int i = 0; i < numberOfPirates; i++)
+        {
+            PirateSpawnPoint spawnPoint = new PirateSpawnPoint(width,spawnPoints);
+            spawnPoints.Add(spawnPoint);
+
+            GameObject pirate = Instantiate(Pirate, spawnPoint.getSpawnPoint(), gameObject.transform.rotation);
+            PirateDeathNotificator pdn = pirate.GetComponent<PirateDeathNotificator>();
+
+            pdn.pirateKilled += pirateNumbers.show;
+        }
 
     }
 

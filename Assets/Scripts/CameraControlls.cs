@@ -7,7 +7,7 @@ public class CameraControlls : MonoBehaviour {
     //Player that is going to be watched by camera
     public Transform player;
     //MakeBackgroud script provides sizes of map
-    public MakeBackground mb;
+    //public MakeBackground mb;
     public float smoothTime = 0.2f;
     public float maxSmoothSpeed = 5f;
 
@@ -31,8 +31,8 @@ public class CameraControlls : MonoBehaviour {
         //Getting Clamp values depending on camera Size and AspectRatio
         minX = thisCamera.orthographicSize * thisCamera.aspect;
         minY = thisCamera.orthographicSize;
-        maxX = mb.width * 2.5f - minX;
-        maxY = mb.heigth * 2.5f - minY;
+        maxX = Mathematical.worldSize * 2.5f - minX;
+        maxY = Mathematical.worldSize * 2.5f - minY;
     }
 	
     void Update ()

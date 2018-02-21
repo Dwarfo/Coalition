@@ -10,12 +10,15 @@ public class Health : MonoBehaviour, IHealthPoint {
 
     [SerializeField]
     private float currentHeath;
+
+    private PirateDeathNotificator deathNotificator;
  
 
 
     void Start()
     {
         currentHeath = maxHealth;
+        deathNotificator = gameObject.GetComponent<PirateDeathNotificator>();
     }
 
     // Update is called once per frame
@@ -40,6 +43,7 @@ public class Health : MonoBehaviour, IHealthPoint {
     {
         GameObject expl = Instantiate(explosion, transform.position, transform.rotation) as GameObject;
         Debug.Log("Pirate Is Down!");
+        deathNotificator.OnDestruction(new OnDeathEventArgs());
         Destroy(gameObject);
     }
 }
