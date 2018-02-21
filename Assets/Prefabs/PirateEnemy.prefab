@@ -365,7 +365,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemy: {fileID: 50184126536378486}
   fireProjectile: {fileID: 114349032419210444}
-  difficultySettings: 2
+  difficultySettings: 1
 --- !u!114 &114349032419210444
 MonoBehaviour:
   m_ObjectHideFlags: 1
