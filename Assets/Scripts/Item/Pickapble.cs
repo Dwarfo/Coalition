@@ -4,11 +4,21 @@ using UnityEngine;
 
 public class Pickapble : MonoBehaviour {
 
+    public string PickableType = "default";
     private Action pickableAction; 
 	
 	void Start ()
     {
-        pickableAction = new ActionRepair();
+        switch (PickableType)
+        {
+            case "repair":
+                pickableAction = new ActionRepair();
+                break;
+            case "default":
+                pickableAction = new Action();
+                break;
+        }
+        //pickableAction = new ActionRepair();
 	}
 	
 	// Update is called once per frame
