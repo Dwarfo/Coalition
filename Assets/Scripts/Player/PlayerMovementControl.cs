@@ -9,7 +9,7 @@ public class PlayerMovementControl : MonoBehaviour {
     public float Acceleration = 10f;
     public float rotSpeed = 10f;
 
-    private bool mode = true;
+    private bool mode = false;
     private float modeSpeed;
     private int dragValue = 10;
     private Vector2 direction;

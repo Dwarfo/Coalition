@@ -18,8 +18,8 @@ public class MakeBackground : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
-        //width = Mathematical.worldSize;
-        //heigth = Mathematical.worldSize;
+        width = Mathematical.worldSize;
+        heigth = Mathematical.worldSize;
 
         spawnPoints.Add(new PirateSpawnPoint());
         int k = 0;
@@ -37,8 +37,6 @@ public class MakeBackground : MonoBehaviour {
         CreateBounds();
         SpawnPirates();
 
-        Time.timeScale = 0;
-        PlayerStateInput.GamePaused = true;
     }
 
     void CreateBounds()

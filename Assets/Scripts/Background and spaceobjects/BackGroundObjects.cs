@@ -8,7 +8,8 @@ public class BackGroundObjects : MonoBehaviour {
     public GameObject healthBar;
     public GameObject gameOverText;
     public GameObject shieldBar;
-
+    public GameObject PauseMenu;
+    public bool GamePaused;
 
     private void Awake()
     {
@@ -20,12 +21,14 @@ public class BackGroundObjects : MonoBehaviour {
         {
             Destroy(gameObject);
         }
+
+        GamePaused = true;
     }
 
     // Use this for initialization
     void Start ()
     {
-        
+        Pause();
     }
 	
 	// Update is called once per frame
@@ -42,5 +45,20 @@ public class BackGroundObjects : MonoBehaviour {
     public void gameOver()
     {
         gameOverText.SetActive(true);
+    }
+
+    public void Pause()
+    {
+        if (!GamePaused)
+        {
+            Time.timeScale = 0;
+        }
+        else
+        {
+            Time.timeScale = 1;
+        }
+
+        GamePaused = !GamePaused;
+        PauseMenu.SetActive(GamePaused);
     }
 }

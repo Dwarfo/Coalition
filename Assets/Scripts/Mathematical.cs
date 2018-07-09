@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Mathematical : MonoBehaviour {
 
-    public static int worldSize;
+    public static int worldSize = 40;
 
 
     public static Vector2 clampVelocity( Rigidbody2D character, float topSpeed)

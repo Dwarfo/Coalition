@@ -1778,6 +1778,8 @@ MonoBehaviour:
   healthBar: {fileID: 249293418}
   gameOverText: {fileID: 979093736}
   shieldBar: {fileID: 1477592318}
+  PauseMenu: {fileID: 979093736}
+  GamePaused: 0
 --- !u!1 &1908209102
 GameObject:
   m_ObjectHideFlags: 0

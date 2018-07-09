@@ -27,7 +27,7 @@ public class Buttons : MonoBehaviour {
 
     private void Pause()
     {
-        if (!PlayerStateInput.GamePaused)
+        if (!BackGroundObjects.instance.GamePaused)
         {
             Time.timeScale = 0;
         }
@@ -36,8 +36,8 @@ public class Buttons : MonoBehaviour {
             Time.timeScale = 1;
         }
 
-        PlayerStateInput.GamePaused = !PlayerStateInput.GamePaused;
-        gameObject.SetActive(PlayerStateInput.GamePaused);
+        BackGroundObjects.instance.GamePaused = !BackGroundObjects.instance.GamePaused;
+        gameObject.SetActive(BackGroundObjects.instance.GamePaused);
     }
 
 
