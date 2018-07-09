@@ -4,8 +4,13 @@ using UnityEngine;
 
 public class Collisions : MonoBehaviour {
 
-    public Health health;
+    private IHealthPoint health;
     private int colcounter = 0;
+
+    private void Start()
+    {
+        health = gameObject.GetComponent<IHealthPoint>();
+    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {

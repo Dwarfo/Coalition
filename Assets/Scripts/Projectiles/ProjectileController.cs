@@ -8,12 +8,12 @@ public class ProjectileController : MonoBehaviour{
     public Rigidbody2D projectile;
     public GameObject explosion;
     public float destroingDelay;
-    
-    private ProjectileNotificator projectileNotificator;
 
+    private ProjectileNotificator projectileNotificator;
 
     void Awake ()
     {
+        projectile = gameObject.GetComponent<Rigidbody2D>();
         Destroy(gameObject, destroingDelay);
         projectileNotificator = gameObject.GetComponent<ProjectileNotificator>();
 	}

@@ -50,13 +50,13 @@ public class DodgingMissiles : MonoBehaviour {
     private void OnTriggerEnter2D(Collider2D collision)
     {
         //Debug.Log("I see ");
-        Transform target = collision.GetComponent<Transform>();
+        
    
         if (collision.gameObject.layer == 11)
         {
+            Transform target = collision.GetComponent<Transform>();
             dangers.Add(collision.transform);
-            ProjectileNotificator projectileNotificator = collision.GetComponent<ProjectileNotificator>();
-            projectileNotificator.missileLeft += forgetMissile;
+            collision.GetComponent<ProjectileNotificator>().missileLeft += forgetMissile;
         }
 
 

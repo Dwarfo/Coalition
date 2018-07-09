@@ -12,7 +12,8 @@ public class PlayerCollisions : MonoBehaviour {
     private int colcounter;
 
 	// Use this for initialization
-	void Start () {
+	void Start ()
+    {
         colcounter = 0;
         player = gameObject.GetComponent<Rigidbody2D>();
         playerHealth = gameObject.GetComponent<PlayerHealth>();

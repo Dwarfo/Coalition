@@ -14,6 +14,9 @@ public class FireProjectile : MonoBehaviour {
     void Start ()
     {
         audioSource = gameObject.GetComponent<AudioSource>();
+
+        if (firingPosition == null)
+            firingPosition = gameObject.transform.Find("FirePosition");
 	}
 	
 	// Update is called once per frame

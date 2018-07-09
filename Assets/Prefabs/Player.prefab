@@ -60,7 +60,7 @@ GameObject:
   - component: {fileID: 114132384548879804}
   - component: {fileID: 114837661649387802}
   - component: {fileID: 114502307067981584}
-  - component: {fileID: 114817619215405202}
+  - component: {fileID: 114218041877934290}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -285,6 +285,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Projectile: {fileID: 1854150772865208, guid: d692e5542528d3244b8ba592c9ceab76, type: 2}
   firingPosition: {fileID: 4024080368481688}
+  shooting: []
 --- !u!114 &114146403796470380
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -300,6 +301,17 @@ MonoBehaviour:
   topSpeed: 20
   Acceleration: 50
   rotSpeed: 10
+--- !u!114 &114218041877934290
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1701129324709588}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cdde99ac2ee2ef7429aaf241e8234b16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114271700546128526
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -328,24 +340,7 @@ MonoBehaviour:
   pmc: {fileID: 114146403796470380}
   shieldControl: {fileID: 114837661649387802}
   playerFiring: {fileID: 114132384548879804}
-  shooting:
-  - {fileID: 8300000, guid: 952118d427ea76e4c8da149165b09192, type: 3}
-  - {fileID: 8300000, guid: 911fabda4fd17924c96388166debff78, type: 3}
-  - {fileID: 8300000, guid: 3f1a045dcf6cf314eaec633e037b3058, type: 3}
-  - {fileID: 8300000, guid: 43c7eaccda95ede4b90078633b7b2373, type: 3}
-  - {fileID: 8300000, guid: 07c2f7292a0bd534a853901a736dc133, type: 3}
---- !u!114 &114817619215405202
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1701129324709588}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d57255a82c75ba947b90981ff75afa6e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  psi: {fileID: 114502307067981584}
+  Background: {fileID: 0}
 --- !u!114 &114837661649387802
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -361,7 +356,7 @@ MonoBehaviour:
   regenRate: 0.1
   shieldBar: {fileID: 0}
   shield: {fileID: 1856394338061242}
-  backgroundTransform: {fileID: 0}
+  shieldsAudio: {fileID: 0}
   currentShield: 0
 --- !u!114 &114974675607674802
 MonoBehaviour:
@@ -374,11 +369,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 792a9aa393599214495465bd25946a3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  backgroundTransform: {fileID: 0}
   maxHealth: 100
   currentHeath: 0
   armor: 5
   healthBar: {fileID: 0}
+  gameOverText: {fileID: 0}
+  explosion: {fileID: 0}
 --- !u!212 &212013666944824816
 SpriteRenderer:
   m_ObjectHideFlags: 1

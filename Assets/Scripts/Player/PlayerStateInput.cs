@@ -7,9 +7,8 @@ public class PlayerStateInput : MonoBehaviour {
     public PlayerMovementControl pmc;
     public ShieldControlls shieldControl;
     public FireProjectile playerFiring;
-    public IHealthPoint playerHealth;
-    public GameObject Background;
-    public static bool gamePaused;
+    public GameObject PauseMenu;
+    public static bool GamePaused;
 
     private bool shieldActive;
     private bool mode;
@@ -17,7 +16,7 @@ public class PlayerStateInput : MonoBehaviour {
 
     void Start ()
     {
-        gamePaused = false;
+        GamePaused = true;
 	}
 	
 	// Update is called once per frame
@@ -34,7 +33,7 @@ public class PlayerStateInput : MonoBehaviour {
 
         if (Input.GetKeyDown("e"))
         {
-            shieldControl.setShield();
+            shieldControl.SetShield();
             
         }
 
@@ -56,7 +55,7 @@ public class PlayerStateInput : MonoBehaviour {
 
     private void Pause()
     {
-        if (!gamePaused)
+        if (!GamePaused)
         {
             Time.timeScale = 0;
         }
@@ -65,7 +64,7 @@ public class PlayerStateInput : MonoBehaviour {
             Time.timeScale = 1;
         }
 
-        gamePaused = !gamePaused;
-        Background.SetActive(gamePaused);
+        GamePaused = !GamePaused;
+        PauseMenu.SetActive(GamePaused);
     }
 }

@@ -18,8 +18,8 @@ public class MakeBackground : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
-        width = Mathematical.worldSize;
-        heigth = Mathematical.worldSize;
+        //width = Mathematical.worldSize;
+        //heigth = Mathematical.worldSize;
 
         spawnPoints.Add(new PirateSpawnPoint());
         int k = 0;
@@ -36,13 +36,16 @@ public class MakeBackground : MonoBehaviour {
 
         CreateBounds();
         SpawnPirates();
+
+        Time.timeScale = 0;
+        PlayerStateInput.GamePaused = true;
     }
 
     void CreateBounds()
     {
         //getting a gameObject that represents Bounds
         GameObject bounds = transform.Find("Bounds").gameObject;
-        //And placing it at the center of generated map
+
         bounds.transform.position = new Vector2((width * 2.5f) / 2, (heigth * 2.5f) / 2);
 
         GameObject[] boundaries = new GameObject[4];
@@ -59,7 +62,7 @@ public class MakeBackground : MonoBehaviour {
             //bColliders[i].usedByComposite = true;
         }
 
-        //Placing gameObject's on the sides of the map
+        //Placing bound gameObject's on the sides of the map
         boundaries[0].transform.position = new Vector2(0, (heigth * 2.5f) / 2);
         boundaries[1].transform.position = new Vector2((width * 2.5f) / 2, heigth * 2.5f);
         boundaries[2].transform.position = new Vector2(width * 2.5f, (heigth * 2.5f) / 2);
@@ -69,9 +72,6 @@ public class MakeBackground : MonoBehaviour {
         bColliders[1].size = new Vector2(width * 2.5f, 1);
         bColliders[2].size = new Vector2(1, heigth * 2.5f);
         bColliders[3].size = new Vector2(width * 2.5f, 1);
-
-        Time.timeScale = 0;
-        PlayerStateInput.gamePaused = true;
     }
 
     void CreateBackgroundTile(int i,int j, int k)
@@ -83,7 +83,7 @@ public class MakeBackground : MonoBehaviour {
         SpriteRenderer renderer = go.AddComponent<SpriteRenderer>();
         go.transform.position = new Vector2(i * (2.5f) + 1.25f, j * (2.5f) + 1.25f);
         renderer.sprite = background.sprite;
-        //Make tile a child of a BackGround creator and putting in right sorting layer
+        //Make tile a child of a BackGround creator and putting in Background sorting layer
         go.transform.SetParent(this.transform, false);
         renderer.sortingLayerName = "Background";
        

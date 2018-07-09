@@ -9,7 +9,6 @@ public class Buttons : MonoBehaviour {
     public Button QuitButton;
     //public GameObject Background;
 
-
 	void Start ()
     {
         PlayButton.onClick.AddListener(PlayGame);
@@ -28,7 +27,7 @@ public class Buttons : MonoBehaviour {
 
     private void Pause()
     {
-        if (!PlayerStateInput.gamePaused)
+        if (!PlayerStateInput.GamePaused)
         {
             Time.timeScale = 0;
         }
@@ -37,8 +36,8 @@ public class Buttons : MonoBehaviour {
             Time.timeScale = 1;
         }
 
-        PlayerStateInput.gamePaused = !PlayerStateInput.gamePaused;
-        gameObject.SetActive(PlayerStateInput.gamePaused);
+        PlayerStateInput.GamePaused = !PlayerStateInput.GamePaused;
+        gameObject.SetActive(PlayerStateInput.GamePaused);
     }
 
 

@@ -2,61 +2,54 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShieldControlls : MonoBehaviour, IHealthPoint
+public class ShieldControlls : MonoBehaviour
 {
 
     public float shieldCap;
     public float regenRate;
     public GameObject shieldBar;
     public GameObject shield;
-    public Transform backgroundTransform;
-    public AudioClip shieldsUp;
+    public AudioClip shieldsAudio;
 
     private AudioSource audioSource;
     private Animator shieldAnim;
     [SerializeField]
     private float currentShield;
-    private int regenTime;
     private bool shieldActive;
-    private Rigidbody2D player;
     private int colcounter = 0;
     private bool broken;
-
+    private Vector3 shieldBarPosition;
 
 
     // Use this for initialization
     void Start ()
     {
         broken = false;
-        player = gameObject.GetComponent<Rigidbody2D>();
-        currentShield = shieldCap;
-        regenTime = 0;
         shieldActive = false;
-        shieldAnim = shield.GetComponent<Animator>();
+        currentShield = shieldCap;
         audioSource = gameObject.GetComponent<AudioSource>();
+        if (shieldBar == null)
+            shieldBar = BackGroundObjects.instance.shieldBar;
+
+        shieldAnim = shield.GetComponent<Animator>();
+        shieldBarPosition = shieldBar.transform.position;
     }
 	
 	// Update is called once per frame
 	void Update ()
     {
-        regenTime++;
-        if (regenTime >= 20 && currentShield < shieldCap)
-        {
-            regenerateShield();
-            regenTime = 0;
-            if (broken && currentShield > shieldCap * 0.4f)
-                broken = false;
-        }
-
+        RegenerateShield();
+        if (broken && currentShield > shieldCap * 0.4f)
+            broken = false;
     }
 
-    private void regenerateShield() {
-        currentShield = Mathf.Clamp(currentShield + regenRate, 0, shieldCap);
-        updateBar();
-        
+    private void RegenerateShield()
+    {
+        currentShield = Mathf.Clamp(currentShield + regenRate * Time.deltaTime, 0, shieldCap);
+        BackGroundObjects.instance.updateBar(currentShield, shieldCap, shieldBarPosition, shieldBar);
     }
 
-    public void setShield()
+    public void SetShield()
     {
         if (!shieldActive)
         {
@@ -72,7 +65,7 @@ public class ShieldControlls : MonoBehaviour, IHealthPoint
         if(!broken)
             shieldActive = !shieldActive;
 
-        audioSource.PlayOneShot(shieldsUp);
+        audioSource.PlayOneShot(shieldsAudio);
 
     }
 
@@ -81,21 +74,19 @@ public class ShieldControlls : MonoBehaviour, IHealthPoint
         currentShield = currentShield - damage ;
         if (currentShield < 0)
             getDestroyed();
-        updateBar();
+        BackGroundObjects.instance.updateBar(currentShield, shieldCap, shieldBarPosition, shieldBar);
     }
-
+    /*
     public void updateBar()
     {
-        //Width of bars is 200
-        float xVec = 200 * ((currentShield / shieldCap) - 1) + backgroundTransform.position.x;
-        //Debug.Log(xVec.ToString());
+        float xVec = 200 * ((currentShield / shieldCap) - 1) + shieldBarPosition.x;
         shieldBar.transform.position = new Vector3(xVec, shieldBar.transform.position.y, shieldBar.transform.position.z);
-    }
+    }*/
 
     public void getDestroyed()
     {
         Debug.Log("Shield's out!");
-        setShield();
+        SetShield();
         broken = true;
 
     }

@@ -31,8 +31,10 @@ public class CameraControlls : MonoBehaviour {
         //Getting Clamp values depending on camera Size and AspectRatio
         minX = thisCamera.orthographicSize * thisCamera.aspect;
         minY = thisCamera.orthographicSize;
-        maxX = Mathematical.worldSize * 2.5f - minX;
-        maxY = Mathematical.worldSize * 2.5f - minY;
+        //maxX = Mathematical.worldSize * 2.5f - minX;
+        //maxY = Mathematical.worldSize * 2.5f - minY;
+        maxX = 40 * 2.5f - minX;
+        maxY = 40 * 2.5f - minY;
     }
 	
     void Update ()
